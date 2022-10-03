@@ -4,12 +4,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
-`
 
-export const Label = styled.label`
-  color: ${({ theme }) => theme.colors.secondary.gray};
-  font-weight: bold;
-  margin-bottom: 6px;
+  & > label {
+    color: ${({ theme }) => theme.colors.secondary.gray};
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
 `
 
 export const TextInput = styled.input`
@@ -22,5 +22,26 @@ export const TextInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+`
+
+export const Select = styled(TextInput)`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -ms-appearance: none;
+`
+
+export const Range = styled(TextInput)`
+  transform: translateY(12px);
+`
+
+export const RangeValuesWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & > span {
+    font-weight: 100;
+    font-size: 12px;
   }
 `
