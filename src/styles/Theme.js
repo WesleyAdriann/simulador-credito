@@ -1,8 +1,7 @@
 export const Theme = {
   fontFamily: {
     roboto: 'Roboto',
-    jetBrainsMono: 'JetBrains Mono'
-
+    jetBrainsMono: 'JetBrains Mono',
   },
   colors: {
     primary: {
@@ -13,7 +12,8 @@ export const Theme = {
       spark: '#FFE27D',
       surf: '#64E3FF',
       psybeam: '#9092FF',
-      white: '#FFF'
+      white: '#FFF',
+      gray: '#616161'
     }
   }
 }
