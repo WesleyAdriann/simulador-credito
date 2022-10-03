@@ -2,11 +2,14 @@ import { ContentWrapper } from '../ContentWrapper'
 
 import { ReactComponent as Logo } from '../../assets/images/Hfest-Badge-Manga.svg'
 
-import { Text } from './styles'
+import { LogoWrapper, Title ,Text } from './styles'
 
 export const Header = () => (
   <ContentWrapper as='header'>
-    <Logo width={80} height={80}/>
+    <LogoWrapper>
+      <Logo width={80} height={80} />
+      <Title as='h1'>Simulador de Crédito</Title>
+    </LogoWrapper>
     <Text>ajuda</Text>
   </ContentWrapper>
 )

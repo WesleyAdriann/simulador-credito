@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   align-items: center;
   display: flex;
+  flex-direction: ${({ flexDirection }) => flexDirection};
   justify-content: space-between;
   max-width: 1024px;
   padding: 24px 32px;
