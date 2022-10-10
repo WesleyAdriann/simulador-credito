@@ -1,4 +1,4 @@
-import { Header, ContentWrapper, Input } from '../../components'
+import { Header, ContentWrapper, Input, Card } from '../../components'
 
 import { Title } from './styles'
 
@@ -45,6 +45,9 @@ export const Home = () => (
           helper: ['30.000', '60.000']
         }}
       />
+      <Card>
+        abcs
+      </Card>
     </ContentWrapper>
   </div>
 )

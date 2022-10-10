@@ -18,7 +18,7 @@ export const TextInput = styled.input`
   background-color: ${({ theme }) => theme.colors.secondary.white};
   border-radius: 4px;
   padding: 12px 6px;
-  min-width: 150px;
+  min-width: 148px;
 
   &:focus {
     outline: none;
@@ -33,7 +33,28 @@ export const Select = styled(TextInput)`
 `
 
 export const Range = styled(TextInput)`
-  transform: translateY(12px);
+  transform: translateY(6px);
+  background: transparent;
+  border: none;
+  -webkit-appearance: none;
+
+
+  &::-webkit-slider-runnable-track {
+    height: 6px;
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.colors.secondary.white};
+    border-radius: 4px;
+    border: 1px solid ${({ theme }) => theme.colors.secondary.gray};
+  }
+
+  &::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.secondary.surf};
+    -webkit-appearance: none;
+    margin-top: -6px;
+  }
 `
 
 export const RangeValuesWrapper = styled.div`

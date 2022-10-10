@@ -13,7 +13,8 @@ export const Theme = {
       surf: '#64E3FF',
       psybeam: '#9092FF',
       white: '#FFF',
-      gray: '#616161'
+      gray: '#616161',
+      silver: '#ccc'
     }
   }
 }
