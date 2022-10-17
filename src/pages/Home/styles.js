@@ -20,9 +20,30 @@ export const Grid = styled.div`
   width: 80%;
 `
 
+export const QuotaWrapper = styled.div`
+  h4 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 40px;
+  }
 
-export const QuotaWrapper = styled.div``
+  strong {
+    color: var(--dove-gray);
+    font-size: 22px;
+  }
 
-export const AmountWrapper = styled.div``
+  span {
+    color: ${({ theme }) => theme.colors.secondary.surf};
+    font-size: 28px;
+    font-weight: bold;
+  }
+`
 
-export const TaxWrapper = styled.div``
+export const CardTextWrapper = styled.div`
+  text-align: center;
+
+h4 {
+  font-weight: bold;
+  line-height: 32px;
+}
+`

@@ -10,8 +10,7 @@ import {
   Title,
   Grid,
   QuotaWrapper,
-  AmountWrapper,
-  TaxWrapper
+  CardTextWrapper
 } from './styles'
 
 export const Home = () => (
@@ -73,17 +72,17 @@ export const Home = () => (
             <h4>Valor da Parcela</h4>
             <div>
               <strong>R$</strong>
-              <span>465,00</span>
+              <span>{' '}465,00</span>
             </div>
           </QuotaWrapper>
-          <AmountWrapper>
+          <CardTextWrapper>
             <h4>Total a pagar</h4>
             <p>R$ 11.112,00</p>
-          </AmountWrapper>
-          <TaxWrapper>
+          </CardTextWrapper>
+          <CardTextWrapper>
             <h4>Taxa de juros (mês)</h4>
             <p>111,12%</p>
-          </TaxWrapper>
+          </CardTextWrapper>
           <Button>Solicitar</Button>
         </Card>
       </Grid>
