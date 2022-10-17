@@ -1,9 +1,15 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+  justify-content: center;
+
+  ${({ gridArea }) => !!gridArea && css`
+    grid-area: ${gridArea};
+  `}
 
   & > label {
     color: ${({ theme }) => theme.colors.secondary.gray};
@@ -18,7 +24,6 @@ export const TextInput = styled.input`
   background-color: ${({ theme }) => theme.colors.secondary.white};
   border-radius: 4px;
   padding: 12px 6px;
-  min-width: 148px;
 
   &:focus {
     outline: none;
@@ -37,6 +42,7 @@ export const Range = styled(TextInput)`
   background: transparent;
   border: none;
   -webkit-appearance: none;
+  margin-top: 14px;
 
 
   &::-webkit-slider-runnable-track {

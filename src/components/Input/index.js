@@ -10,7 +10,7 @@ import {
   RangeValuesWrapper
 } from './styles'
 
-const Component = ({ label, as, selectOptions = [], range = {}, ...props }) => {
+const Component = ({ label, as, selectOptions = [], range = {}, gridArea, ...props }) => {
   const id = useId()
 
   const Component = useMemo(() => {
@@ -45,7 +45,7 @@ const Component = ({ label, as, selectOptions = [], range = {}, ...props }) => {
   }, [as, id, props, range, selectOptions])
 
   return (
-    <Container>
+    <Container gridArea={gridArea}>
       {!!label && (
         <label htmlFor={id}>
           {label}
