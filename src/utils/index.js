@@ -1,8 +1,16 @@
 export const normalize = (value = '') =>
   `${value}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 
-export const formatNumber = (value = '') =>
-  `${value}`.replace(/(\d)(?=(\d{3})+$)/g, '$1.')
+export const formatNumber = (value = '', isFloat = false) => {
+  const rg = /(\d)(?=(\d{3})+$)/g
+  if(isFloat) {
+    const stringNumber = value?.toFixed(2)
+    const decimal = stringNumber.slice(-2)
+    const integer = stringNumber.slice(0, -3)
+    return `${integer.replace(rg, '$1.')},${decimal}`
+  }
+  return `${value}`.replace(rg, '$1.')
+}
 
 export const range2Value = (range, percent) => {
   const [min, max] = range
