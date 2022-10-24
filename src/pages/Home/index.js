@@ -9,7 +9,12 @@ import {
 } from '../../components'
 
 import database from '../../infra/database.json'
-import { formatNumber, range2Value, value2Range } from '../../utils'
+import {
+  formatNumber,
+  range2Value,
+  value2Range,
+  dot2Comma
+} from '../../utils'
 
 import {
   Title,
@@ -27,7 +32,8 @@ export const Home = () => {
     warrantyRange: 0.5,
     warranty: range2Value(warranty.warranty_range, 0.5),
     loanRange: 0.5,
-    loan: range2Value(warranty.loan_range, 0.5)
+    loan: range2Value(warranty.loan_range, 0.5),
+    installments: warranty.installments[0]
   })
 
   const handleChangeWarrantyType = useCallback((event) => {
@@ -56,6 +62,16 @@ export const Home = () => {
     }))
   }, [warranty])
 
+  const handleChangeInstallments = useCallback((event) => {
+    setFormValues((prev) => ({
+      ...prev,
+      installments: parseInt(event.target.value)
+    }))
+  }, [])
+
+  const totalValue = (database.iof + database.interest_rate + formValues.installments + 1) * formValues.loan
+  const installmentValue = totalValue / formValues.installments
+
   return (
     <div>
       <Header />
@@ -72,6 +88,7 @@ export const Home = () => {
             as='select'
             gridArea='installments'
             label='Número de parcelas'
+            onChange={handleChangeInstallments}
             selectOptions={warranty.installments}
           />
           <Input
@@ -122,17 +139,17 @@ export const Home = () => {
             <QuotaWrapper>
               <h4>Valor da Parcela</h4>
               <div>
-                <strong>R$</strong>
-                <span>{' '}465,00</span>
+                <strong>R$ </strong>
+                <span>{formatNumber(installmentValue, true)}</span>
               </div>
             </QuotaWrapper>
             <CardTextWrapper>
               <h4>Total a pagar</h4>
-              <p>R$ 11.112,00</p>
+              <p>R$ {formatNumber(totalValue, true)}</p>
             </CardTextWrapper>
             <CardTextWrapper>
               <h4>Taxa de juros (mês)</h4>
-              <p>111,12%</p>
+              <p>{dot2Comma((database.iof + database.interest_rate) * 100)}%</p>
             </CardTextWrapper>
             <Button>Solicitar</Button>
           </Card>

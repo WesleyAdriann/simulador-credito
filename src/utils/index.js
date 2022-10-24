@@ -25,3 +25,9 @@ export const value2Range = (range, value) => {
   const rangeValue = max - min
   return (value - min) / rangeValue
 }
+
+
+export const dot2Comma = (value = 0) => {
+  const stringNumber = value.toFixed(2)
+  return stringNumber.replace('.', ',')
+}

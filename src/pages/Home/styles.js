@@ -21,6 +21,8 @@ export const Grid = styled.div`
 `
 
 export const QuotaWrapper = styled.div`
+  text-align: center;
+
   h4 {
     font-size: 18px;
     font-weight: 300;
