@@ -1,0 +1,14 @@
+{
+  "iof": 0.0638,
+  "interest_rate": 0.0234,
+  "max_loan": 0.8,
+  "warranties": [
+    {
+      "id": 0,
+      "name": "Veículo",
+      "installments": [24, 36, 48],
+      "warranty_range": [5000, 3000000],
+      "loan_range": [3000,  100000]
+    }
+  ]
+}

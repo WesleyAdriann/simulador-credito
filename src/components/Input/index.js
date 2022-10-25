@@ -10,7 +10,7 @@ import {
   RangeValuesWrapper
 } from './styles'
 
-const Component = ({ label, as, selectOptions = [], range = {}, gridArea, ...props }) => {
+const Component = ({ label, as, selectOptions = [], selectOptionsValue = [], range = {}, gridArea, ...props }) => {
   const id = useId()
 
   const Component = useMemo(() => {
@@ -30,10 +30,13 @@ const Component = ({ label, as, selectOptions = [], range = {}, gridArea, ...pro
     if(as === 'select') return (
       <Select as='select' {...props} id={id}>
         {
-          selectOptions.map((option) =>
+          selectOptions.map((option, index) =>
             <option
               key={normalize(option)}
-              value={normalize(option)}
+              value={
+                selectOptionsValue.length ?
+                  selectOptionsValue[index] :
+                  normalize(option)}
             >
               {option}
             </option>
@@ -42,7 +45,7 @@ const Component = ({ label, as, selectOptions = [], range = {}, gridArea, ...pro
       </Select>
     )
     return <TextInput type='text' {...props} id={id} />
-  }, [as, id, props, range, selectOptions])
+  }, [as, id, props, range, selectOptions, selectOptionsValue])
 
   return (
     <Container gridArea={gridArea}>
