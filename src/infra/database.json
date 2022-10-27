@@ -2,19 +2,19 @@
   "iof": 0.0638,
   "interest_rate": 0.0234,
   "max_loan": 0.8,
-  "warranties": [
+  "guarantees": [
     {
       "id": 0,
       "name": "Veículo",
       "installments": [24, 36, 48],
-      "warranty_range": [5000, 3000000],
+      "guarantee_range": [5000, 3000000],
       "loan_range": [3000,  100000]
     },
     {
       "id": 1,
       "name": "Imóvel",
       "installments": [120, 180, 240],
-      "warranty_range": [50000, 100000000],
+      "guarantee_range": [50000, 100000000],
       "loan_range": [30000, 4500000]
     }
   ]

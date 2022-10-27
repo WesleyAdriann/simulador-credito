@@ -14,8 +14,8 @@ export const Grid = styled.div`
   gap: 48px;
   grid-template-columns: repeat(2, 1fr) 1.5fr;
   grid-template-areas:
-    "installments warranty card"
-    "warranty-value warranty-range card"
+    "installments guarantee card"
+    "guarantee-value guarantee-range card"
     "loan loan-range card";
   width: 80%;
 `
