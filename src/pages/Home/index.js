@@ -23,44 +23,47 @@ import {
   CardTextWrapper
 } from './styles'
 
-export const Home = () => {
-  const [warranties, warrantiesId] = useMemo(() =>
-    database.warranties.reduce((acc, value) => [[...acc[0], value.name], [...acc[1], value.id]], [[], []])
-  , [])
-  const [warranty, setWarranty] = useState(database.warranties[0])
-  const [formValues, setFormValues] = useState({
-    warrantyRange: 0.5,
-    warranty: range2Value(warranty.warranty_range, 0.5),
-    loanRange: 0.5,
-    loan: range2Value(warranty.loan_range, 0.5),
-    installments: warranty.installments[0]
-  })
+const initialForm = (guarantee) => ({
+  guaranteeRange: 0.5,
+  guarantee: range2Value(guarantee.guarantee_range, 0.5),
+  loanRange: 0.5,
+  loan: range2Value(guarantee.loan_range, 0.5),
+  installments: guarantee.installments[0]
+})
 
-  const handleChangeWarrantyType = useCallback((event) => {
-    const id = event.target.value
-    setWarranty(database.warranties[id])
+export const Home = () => {
+  const [guarantees, guaranteesId] = useMemo(() =>
+    database.guarantees.reduce((acc, value) => [[...acc[0], value.name], [...acc[1], value.id]], [[], []])
+  , [])
+  const [guarantee, setQuarantee] = useState(database.guarantees[0])
+  const [formValues, setFormValues] = useState(initialForm(guarantee))
+
+  const handleChangeQuaranteeType = useCallback((event) => {
+    const dataQuarantee = database.guarantees[event.target.value]
+    setQuarantee(dataQuarantee)
+    setFormValues(initialForm(dataQuarantee))
   }, [])
 
   const handleChangeRange = useCallback((type) => (event) => {
     const floatValue = parseInt(event.target.value) / 100
-    const value = range2Value(warranty[`${type}_range`], floatValue)
+    const value = range2Value(guarantee[`${type}_range`], floatValue)
     setFormValues((prev) => ({
       ...prev,
       [`${type}Range`]: floatValue,
       [type]: value
     }))
-  }, [warranty])
+  }, [guarantee])
 
   const handleChangeAmount = useCallback((type) => (event) => {
     const inputValue = event.target.value.replace(/\D/g) || '0'
     const value = parseInt(inputValue, '')
-    const floatValue = value2Range(warranty[`${type}_range`], value)
+    const floatValue = value2Range(guarantee[`${type}_range`], value)
     setFormValues((prev) => ({
       ...prev,
       [`${type}Range`]: floatValue,
       [type]: value
     }))
-  }, [warranty])
+  }, [guarantee])
 
   const handleChangeInstallments = useCallback((event) => {
     setFormValues((prev) => ({
@@ -89,32 +92,32 @@ export const Home = () => {
             gridArea='installments'
             label='Número de parcelas'
             onChange={handleChangeInstallments}
-            selectOptions={warranty.installments}
+            selectOptions={guarantee.installments}
           />
           <Input
-            gridArea='warranty'
+            gridArea='guarantee'
             as='select'
             label='Garantia'
-            onChange={handleChangeWarrantyType}
-            selectOptions={warranties}
-            selectOptionsValue={warrantiesId}
+            onChange={handleChangeQuaranteeType}
+            selectOptions={guarantees}
+            selectOptionsValue={guaranteesId}
           />
           <Input
-            gridArea='warranty-value'
+            gridArea='guarantee-value'
             label='Valor da Garantia'
-            onChange={handleChangeAmount('warranty')}
-            value={formValues.warranty}
+            onChange={handleChangeAmount('guarantee')}
+            value={formValues.guarantee}
           />
           <Input
             as='range'
-            gridArea='warranty-range'
-            onChange={handleChangeRange('warranty')}
+            gridArea='guarantee-range'
+            onChange={handleChangeRange('guarantee')}
             range={{
               min: 0,
               max: 100,
-              value: formValues.warrantyRange * 100,
+              value: formValues.guaranteeRange * 100,
               step: 10,
-              helper: warranty.warranty_range.map(formatNumber)
+              helper: guarantee.guarantee_range.map(formatNumber)
             }}
           />
           <Input
@@ -132,7 +135,7 @@ export const Home = () => {
               max: 100,
               value: formValues.loanRange * 100,
               step: 10,
-              helper: warranty.loan_range.map(formatNumber)
+              helper: guarantee.loan_range.map(formatNumber)
             }}
           />
           <Card gridArea='card'>
