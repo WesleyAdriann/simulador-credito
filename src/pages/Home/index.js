@@ -37,8 +37,15 @@ export const Home = () => {
   })
 
   const handleChangeWarrantyType = useCallback((event) => {
-    const id = event.target.value
-    setWarranty(database.warranties[id])
+    const dataWarranty = database.warranties[event.target.value]
+    setWarranty(dataWarranty)
+    setFormValues({
+      warrantyRange: 0.5,
+      warranty: range2Value(dataWarranty.warranty_range, 0.5),
+      loanRange: 0.5,
+      loan: range2Value(dataWarranty.loan_range, 0.5),
+      installments: dataWarranty.installments[0]
+    })
   }, [])
 
   const handleChangeRange = useCallback((type) => (event) => {
