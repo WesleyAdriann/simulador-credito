@@ -6,6 +6,7 @@ import {
   Input,
   Card,
   Button,
+  Modal,
 } from '../../components'
 
 import database from '../../infra/database.json'
@@ -24,7 +25,7 @@ import {
 } from './styles'
 
 const initialForm = (guarantee) => ({
-  guaranteeRange: 0.5,
+  guaranteeRange: 0.2,
   guarantee: range2Value(guarantee.guarantee_range, 0.5),
   loanRange: 0.5,
   loan: range2Value(guarantee.loan_range, 0.5),
@@ -37,6 +38,14 @@ export const Home = () => {
   , [])
   const [guarantee, setQuarantee] = useState(database.guarantees[0])
   const [formValues, setFormValues] = useState(initialForm(guarantee))
+  const [modal, setModal] = useState({
+    isVisible: false,
+    title: '',
+    description: '',
+  })
+
+  const totalValue = (database.iof + database.interest_rate + formValues.installments + 1) * formValues.loan
+  const installmentValue = totalValue / formValues.installments
 
   const handleChangeQuaranteeType = useCallback((event) => {
     const dataQuarantee = database.guarantees[event.target.value]
@@ -72,11 +81,31 @@ export const Home = () => {
     }))
   }, [])
 
-  const totalValue = (database.iof + database.interest_rate + formValues.installments + 1) * formValues.loan
-  const installmentValue = totalValue / formValues.installments
+  const handleSubmit = useCallback(() => {
+    const formatWrapper = (value) => formatNumber(value, true)
+    const description = `Número de parcelas: ${formValues.installments}
+      Garantia: ${guarantee.name}
+      Valor da Garantia: ${formatWrapper(formValues.guarantee)}
+      Valor do Empréstimo: ${formatWrapper(formValues.loan)}
+      Total: ${formatWrapper(totalValue)}
+    `
+    setModal({
+      title: 'Sucesso',
+      description,
+      isVisible: true
+    })
+  }, [formValues.guarantee, formValues.installments, formValues.loan, guarantee.name, totalValue])
+
+  const onCloseModal = useCallback(() => {
+    setModal((prev) => ({ ...prev, isVisible: false }))
+  }, [])
 
   return (
     <div>
+      <Modal
+        {...modal}
+        onClose={onCloseModal}
+      />
       <Header />
       <ContentWrapper
         as='section'
@@ -154,7 +183,7 @@ export const Home = () => {
               <h4>Taxa de juros (mês)</h4>
               <p>{dot2Comma((database.iof + database.interest_rate) * 100)}%</p>
             </CardTextWrapper>
-            <Button>Solicitar</Button>
+            <Button onClick={handleSubmit}>Solicitar</Button>
           </Card>
         </Grid>
       </ContentWrapper>

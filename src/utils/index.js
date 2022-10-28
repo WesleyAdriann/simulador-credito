@@ -1,9 +1,9 @@
 export const normalize = (value = '') =>
   `${value}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 
-export const formatNumber = (value = '', isFloat = false) => {
+export const formatNumber = (value = '', withDecimal = false) => {
   const rg = /(\d)(?=(\d{3})+$)/g
-  if(isFloat) {
+  if(withDecimal) {
     const stringNumber = value?.toFixed(2)
     const decimal = stringNumber.slice(-2)
     const integer = stringNumber.slice(0, -3)
